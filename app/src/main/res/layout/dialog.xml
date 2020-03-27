@@ -1,0 +1,53 @@
+<TableLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:gravity="end"
+            android:text="@string/category_name" />
+
+        <EditText
+            android:id="@+id/userName"
+            android:hint=""
+            android:inputType="text" />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"/>
+    <TableRow android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/button_cancel_user_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textSize="20dp"
+            android:textAllCaps="false"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="20dp"/>
+
+
+        <Button
+            android:id="@+id/button_save_user_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/save_category"
+            android:textSize="20dp"
+            android:textAllCaps="false"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="20dp"/>
+
+    </TableRow>
+
+</TableLayout>

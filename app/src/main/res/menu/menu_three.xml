@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/new_cat"
+        android:background="@color/colorPrimaryDark"
+        android:icon="@drawable/baseline_library_add_white_24"
+        android:title="@string/new_category"/>
+    <item android:id="@+id/settings"
+        android:icon="@drawable/baseline_settings_white_24"
+        android:background="@color/colorPrimaryDark"
+        android:title="@string/title_settings"/>
+
+    <item android:id="@+id/exit_nav"
+        android:icon="@drawable/baseline_exit_to_app_white_24"
+        android:background="@color/colorPrimaryDark"
+        android:title="@string/exit"/>
+</menu>

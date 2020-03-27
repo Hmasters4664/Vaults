@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="colors">
+    <item>@color/white</item>
+    <item>@color/Orange1</item>
+    <item>@color/Orange2</item>
+    <item>@color/colorAccent</item>
+    <item>@color/purpleEnd</item>
+    <item>@color/greenStart</item>
+    <item>@color/greenEnd</item>
+    <item>@color/purple</item>
+    <item>@color/purpleStart</item>
+    </array>
+
+    <string-array name="names">
+        <item>white</item>
+        <item>Orange1</item>
+        <item>Orange2</item>
+        <item>Light Blue</item>
+        <item>Blue</item>
+        <item>Light Green</item>
+        <item>Green</item>
+        <item>Purple</item>
+        <item>Lilac</item>
+    </string-array>
+
+
+        <array name="colours">
+            <item>#660066</item>
+            <item>#000000</item>
+            <item>#FB0000</item>
+            <item>#11c612</item>
+            <item>#a369ff</item>
+            <item>#0e56ff</item>
+            <item>#3700B3</item>
+            <item>#f87b05</item>
+            <item>#ffa500</item>
+        </array>
+
+
+</resources>
