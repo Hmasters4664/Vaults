@@ -7,6 +7,7 @@ public class Password {
     private String password;
     private String notes;
     private String group;
+    private long rowid;
 
     public Password() {
         this.group="";
@@ -68,6 +69,14 @@ public class Password {
 
     public String getTitle() {
         return title;
+    }
+
+    public long getRowid() {
+        return rowid;
+    }
+
+    public void setRowid(long rowid) {
+        this.rowid = rowid;
     }
 
     public void setTitle(String title) {

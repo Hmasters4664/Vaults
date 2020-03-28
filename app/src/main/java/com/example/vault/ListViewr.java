@@ -10,12 +10,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.vault.Adapters.PasswordAdapter;
 import com.example.vault.objects.Categories;
 import com.example.vault.objects.Password;
 import com.example.vault.objects.SharedPrefManager;
+import com.example.vault.touchlisteners.RecyclerTouchListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.sqlcipher.Cursor;
@@ -74,6 +76,8 @@ public class ListViewr extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.new_cat:
                         Intent intent = new Intent(ListViewr.this, PasswordCreation.class);
+                        intent.putExtra("category",category);
+                        intent.putExtra("password", passwords);
                         startActivity(intent);
                         finish();
 
@@ -89,6 +93,19 @@ public class ListViewr extends AppCompatActivity {
             }
         });
 
+        mrecyler.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), mrecyler, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Toast.makeText(ListViewr.this, "clicked", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+                Toast.makeText(ListViewr.this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+
+            }
+        }));
+
 
     }
     private void initializePass()
@@ -98,7 +115,7 @@ public class ListViewr extends AppCompatActivity {
     }
     private void showpassword()
     {
-        String query = "SELECT * FROM passwords WHERE category = ?";
+        String query = "SELECT title, username, website, password, notes, category, ROWID FROM passwords WHERE category=?";
         Cursor cursor = database.rawQuery(query, new String[] {category});
         PList.clear();
 
@@ -106,6 +123,7 @@ public class ListViewr extends AppCompatActivity {
             if (cursor.moveToFirst()) {
                 do {
                     Password ct = new Password();
+                    ct.setRowid(cursor.getLong(cursor.getColumnIndex("rowid")));
                     ct.setTitle(cursor.getString(cursor.getColumnIndex("title")));
                     ct.setUsername(cursor.getString(cursor.getColumnIndex("username")));
                     ct.setWebsite(cursor.getString(cursor.getColumnIndex("website")));
@@ -124,6 +142,32 @@ public class ListViewr extends AppCompatActivity {
             if (cursor != null && !cursor.isClosed()) {
                 cursor.close();
             }
+        }
+
+    }
+    @Override
+    public void onResume(){
+        super.onResume();
+        Bundle extras = getIntent().getExtras();
+
+        if(extras !=null)
+        {
+            passwords = extras.getString("password");
+            category = extras.getString("category");
+        }
+
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Bundle extras = getIntent().getExtras();
+
+        if(extras !=null)
+        {
+            passwords = extras.getString("password");
+            category = extras.getString("category");
         }
 
     }

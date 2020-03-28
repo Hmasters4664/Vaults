@@ -2,11 +2,13 @@ package com.example.vault;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import net.sqlcipher.database.SQLiteDatabase;
 
@@ -49,8 +51,34 @@ public class PasswordCreation extends AppCompatActivity {
         generate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Pass = GetPassword(16);
+                int len;
+                try {
+                    len = Integer.parseInt(length.getText().toString());
+                } catch(NumberFormatException nfe) {
+                    len=16;
+                }
+
+                String Pass = GetPassword(len);
                 password.setText(Pass);
+            }
+        });
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if (check())
+               {
+                   save();
+                   Intent intent = new Intent(getBaseContext(), ListViewr.class);
+                   intent.putExtra("category",category);
+                   intent.putExtra("password", passwords);
+                   startActivity(intent);
+                   finish();
+
+               }else
+               {
+                   Toast.makeText(PasswordCreation.this, "Fill in title", Toast.LENGTH_LONG).show();
+               }
+
             }
         });
 
@@ -60,7 +88,7 @@ public class PasswordCreation extends AppCompatActivity {
     }
 
     public String GetPassword(int length){
-        char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
+        char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$&!".toCharArray();
         StringBuilder stringBuilder = new StringBuilder();
 
         Random rand = new Random();
@@ -86,9 +114,18 @@ public class PasswordCreation extends AppCompatActivity {
         String w=website.getText().toString();
         String p=password.getText().toString();
         String n="";
-        database.execSQL("insert into categories(title, username, website, password, notes, " +
+        database.execSQL("insert into passwords(title, username, website, password, notes, " +
                 "category) values(?, ?, ?, ?, ?, ?)",
                 new Object[]{t,u,w,p,n,category});
+    }
+
+    private boolean check()
+    {
+        if(title.getText().toString().isEmpty()) {
+            return false;
+        } else{
+            return true;
+        }
     }
 
 }

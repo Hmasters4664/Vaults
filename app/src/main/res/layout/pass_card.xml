@@ -18,9 +18,9 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="59dp"
-                android:layout_height="52dp"
-                android:layout_marginTop="48dp"
+                android:layout_width="131dp"
+                android:layout_height="83dp"
+                android:layout_marginTop="24dp"
                 android:padding="4dp"
                 android:src="@drawable/baseline_folder_shared_white_24"
                 app:layout_constraintStart_toStartOf="parent"
@@ -30,20 +30,24 @@
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
-                android:layout_marginEnd="240dp"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="80dp"
                 android:text="TextView"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.005"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="240dp"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="32dp"
                 android:text="TextView"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.017"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

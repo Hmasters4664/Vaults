@@ -59,7 +59,8 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.ViewHo
                 .withBorder(4)
                 .endConfig()
                 .rect();
-        TextDrawable ic2 = builder.build("B", color2);
+        char c =Passwordlist.get(position).getTitle().charAt(0);
+        TextDrawable ic2 = builder.build(String.valueOf(c), color2);
         holder.image.setImageDrawable(ic2);
     }
 
@@ -74,20 +75,6 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.ViewHo
             title = mView.findViewById(R.id.title);
             username = mView.findViewById(R.id.username);
             image = mView.findViewById(R.id.imageView);
-
-            mView.setOnClickListener(new View.OnClickListener() {
-                @Override public void onClick(View v) {
-                    Toast.makeText(context,"OPENEDIT",Toast.LENGTH_LONG);
-
-                }
-        });
-            mView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    Toast.makeText(context,"CopyToClipboard",Toast.LENGTH_LONG);
-                    return false;
-                }
-            });
     }
 
     }
