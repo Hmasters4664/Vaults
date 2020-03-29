@@ -2,6 +2,7 @@ package com.example.vault;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import net.sqlcipher.Cursor;
 import net.sqlcipher.database.SQLiteDatabase;
 
 import java.io.File;
@@ -20,6 +22,7 @@ public class PasswordCreation extends AppCompatActivity {
     private SQLiteDatabase database;
     private String passwords;
     private String category;
+    private Long id;
     private CheckBox lower,upper,special,num;
     private EditText title,username,website,length,password;
     private Button save,generate;
@@ -35,6 +38,7 @@ public class PasswordCreation extends AppCompatActivity {
         {
             passwords = extras.getString("password");
             category = extras.getString("category");
+            id = extras.getLong("id");
         }
         lower =findViewById(R.id.lowercase);
         upper = findViewById(R.id.uppercase);
@@ -47,6 +51,11 @@ public class PasswordCreation extends AppCompatActivity {
         save = findViewById(R.id.save);
         generate = findViewById(R.id.gen);
         initializePass();
+        if (id!=null)
+        {
+
+            select();
+        }
 
         generate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,7 +76,12 @@ public class PasswordCreation extends AppCompatActivity {
             public void onClick(View v) {
                if (check())
                {
-                   save();
+                   if(id!=null)
+                   {
+                       edit();
+                   }else {
+                       save();
+                   }
                    Intent intent = new Intent(getBaseContext(), ListViewr.class);
                    intent.putExtra("category",category);
                    intent.putExtra("password", passwords);
@@ -126,6 +140,33 @@ public class PasswordCreation extends AppCompatActivity {
         } else{
             return true;
         }
+    }
+
+    private void edit()
+    {
+        String t=title.getText().toString();
+        String u=username.getText().toString();
+        String w=website.getText().toString();
+        String p=password.getText().toString();
+        String n="";
+        ContentValues data = new ContentValues();
+        data.put("title",t);
+        data.put("username",u);
+        data.put("website",w);
+        data.put("password",p);
+        data.put("notes",n);
+        database.update("passwords",data,"ROWID="+Long.toString(id),null);
+
+
+    }
+    private void select(){
+    String query = "SELECT title, username, website, password, notes, category, ROWID FROM passwords WHERE ROWID=?";
+    Cursor cursor = database.rawQuery(query, new Long[] {id});
+        cursor.moveToFirst();
+        title.setText(cursor.getString(cursor.getColumnIndex("title")));
+        username.setText(cursor.getString(cursor.getColumnIndex("username")));
+        website.setText(cursor.getString(cursor.getColumnIndex("website")));
+        password.setText(cursor.getString(cursor.getColumnIndex("password")));
     }
 
 }

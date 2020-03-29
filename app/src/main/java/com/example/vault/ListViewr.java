@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -96,12 +99,22 @@ public class ListViewr extends AppCompatActivity {
         mrecyler.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), mrecyler, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(ListViewr.this, "clicked", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ListViewr.this, PasswordCreation.class);
+                intent.putExtra("category",category);
+                intent.putExtra("password", passwords);
+                intent.putExtra("id", PList.get(position).getRowid());
+                startActivity(intent);
+                finish();
             }
 
             @Override
             public void onLongClick(View view, int position) {
                 Toast.makeText(ListViewr.this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+                String pass  = PList.get(position).getPassword();
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("password", pass);
+                assert clipboard != null;
+                clipboard.setPrimaryClip(clip);
 
             }
         }));
