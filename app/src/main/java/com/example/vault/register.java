@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -25,11 +26,16 @@ public class register extends AppCompatActivity {
     private EditText password;
     private TextView textViewPasswordStrengthIndiactor;
     private Button login;
+    private String passwords;
+    private SQLiteDatabase database;
+    private SQLiteDatabase category;
+    private String sh, sh2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
         password = findViewById(R.id.input_password);
         textViewPasswordStrengthIndiactor = findViewById(R.id.strength);
         login = findViewById(R.id.button);
@@ -69,27 +75,21 @@ public class register extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (SharedPrefManager.getInstance(getBaseContext()).isLoggedIn()) {
-                    if(SharedPrefManager.getInstance(getBaseContext()).getHash().contentEquals(password.getText().toString())) {
-                        Intent i = new Intent(getBaseContext(), MainActivity.class);
-                        i.putExtra("password", password.getText().toString());
-                    }
-                } else {
-                    ///create db
-
-
+                int a=0;
+                if(!SharedPrefManager.getInstance(getApplicationContext()).isInitialized())
+                {
+                    InitializeCategories();
+                    InitializeSQLCipher();
+                    SharedPrefManager.getInstance(getApplicationContext()).Initialize();
                     try {
-                        SharedPrefManager.getInstance(getBaseContext()).accessed(hash(password.getText().toString()));
+                        sh= hash(password.getText().toString().trim());
                     } catch (NoSuchAlgorithmException e) {
                         e.printStackTrace();
                     }
-                    Intent i = new Intent(getBaseContext(), MainActivity.class);
-                    i.putExtra("password", password.getText().toString());
-                    startActivity(i);
-                    finish();
-
-
+                    SharedPrefManager.getInstance(getApplicationContext()).accessed(sh);
                 }
+
+                login();
 
             }
         });
@@ -98,8 +98,45 @@ public class register extends AppCompatActivity {
 
     public String hash(String input) throws NoSuchAlgorithmException {
         Hasher hasher = Hashing.sha256().newHasher();
-        return hasher.putString(input, StandardCharsets.UTF_8)
+        return hasher.putString(input, StandardCharsets.UTF_8).hash()
                 .toString();
+    }
+
+    private void InitializeSQLCipher() {
+        File databaseFile = getDatabasePath("passwordfile.db");
+        databaseFile.mkdirs();
+        databaseFile.delete();
+        database = SQLiteDatabase.openOrCreateDatabase(databaseFile,password.getText().toString().trim(), null);
+        database.execSQL("create table passwords(title, username, website, password, notes, category)");
+    }
+    private void InitializeCategories() {
+        File databaseFile = getDatabasePath("categories.db");
+        databaseFile.mkdirs();
+        databaseFile.delete();
+        category = SQLiteDatabase.openOrCreateDatabase(databaseFile, "#!@#$%^&()0987654321", null);
+        category.execSQL("create table categories(Name, Colour)");
+    }
+    private void login()
+    {
+        Hasher hasher = Hashing.sha256().newHasher();
+        try {
+            sh2= hash(password.getText().toString().trim());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        sh=SharedPrefManager.getInstance(getApplicationContext()).getHash();
+
+        if(sh.equals(sh2))
+        {
+            SharedPrefManager.getInstance(getApplicationContext()).LogIn();
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            intent.putExtra("password", password.getText().toString().trim());
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(register.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 }

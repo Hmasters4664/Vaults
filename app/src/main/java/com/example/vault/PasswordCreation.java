@@ -26,6 +26,7 @@ public class PasswordCreation extends AppCompatActivity {
     private CheckBox lower,upper,special,num;
     private EditText title,username,website,length,password;
     private Button save,generate;
+    private Boolean edits;
     private int len;
 
 
@@ -39,6 +40,7 @@ public class PasswordCreation extends AppCompatActivity {
             passwords = extras.getString("password");
             category = extras.getString("category");
             id = extras.getLong("id");
+            edits = extras.getBoolean("edit");
         }
         lower =findViewById(R.id.lowercase);
         upper = findViewById(R.id.uppercase);
@@ -51,7 +53,7 @@ public class PasswordCreation extends AppCompatActivity {
         save = findViewById(R.id.save);
         generate = findViewById(R.id.gen);
         initializePass();
-        if (id!=null)
+        if (edits)
         {
 
             select();
@@ -76,7 +78,7 @@ public class PasswordCreation extends AppCompatActivity {
             public void onClick(View v) {
                if (check())
                {
-                   if(id!=null)
+                   if(edits)
                    {
                        edit();
                    }else {
@@ -162,11 +164,12 @@ public class PasswordCreation extends AppCompatActivity {
     private void select(){
     String query = "SELECT title, username, website, password, notes, category, ROWID FROM passwords WHERE ROWID=?";
     Cursor cursor = database.rawQuery(query, new Long[] {id});
-        cursor.moveToFirst();
-        title.setText(cursor.getString(cursor.getColumnIndex("title")));
-        username.setText(cursor.getString(cursor.getColumnIndex("username")));
-        website.setText(cursor.getString(cursor.getColumnIndex("website")));
-        password.setText(cursor.getString(cursor.getColumnIndex("password")));
+        if (cursor.moveToFirst()) {
+            title.setText(cursor.getString(cursor.getColumnIndex("title")));
+            username.setText(cursor.getString(cursor.getColumnIndex("username")));
+            website.setText(cursor.getString(cursor.getColumnIndex("website")));
+            password.setText(cursor.getString(cursor.getColumnIndex("password")));
+        }
     }
 
 }

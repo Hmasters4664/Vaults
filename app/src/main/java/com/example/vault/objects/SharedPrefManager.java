@@ -23,14 +23,14 @@ public class SharedPrefManager {
     public void accessed(String password) {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(IS_OPEN, "true");
+        editor.putBoolean(IS_OPEN, true);
         editor.putString(PASSHASH,password);
         editor.apply();
     }
 
     public boolean isLoggedIn() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString(IS_OPEN, null) != null;
+        return sharedPreferences.getBoolean(IS_OPEN, false) ;
     }
 
     public String getHash()
@@ -50,6 +50,21 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean(IS_INITIALIZED,true);
+        editor.apply();
+    }
+
+    public void LogOut() {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(IS_OPEN, false);
+        editor.apply();
+    }
+
+    public void LogIn()
+    {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(IS_OPEN, true);
         editor.apply();
     }
 

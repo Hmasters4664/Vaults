@@ -81,6 +81,7 @@ public class ListViewr extends AppCompatActivity {
                         Intent intent = new Intent(ListViewr.this, PasswordCreation.class);
                         intent.putExtra("category",category);
                         intent.putExtra("password", passwords);
+                        intent.putExtra("edit",false );
                         startActivity(intent);
                         finish();
 
@@ -103,6 +104,7 @@ public class ListViewr extends AppCompatActivity {
                 intent.putExtra("category",category);
                 intent.putExtra("password", passwords);
                 intent.putExtra("id", PList.get(position).getRowid());
+                intent.putExtra("edit",true );
                 startActivity(intent);
                 finish();
             }

@@ -57,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         cinfo= new ArrayList<>();
         cinfo.clear();
+
         SQLiteDatabase.loadLibs(this);
         view = (RecyclerView) findViewById(R.id.rec);
         CatA = new CategoryAdapter(cinfo);
@@ -83,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.exit_nav:
                         Toast.makeText(MainActivity.this, "Log Out", Toast.LENGTH_SHORT).show();
+                        out();
+                        Intent i = new Intent(getBaseContext(), register.class);
+                        startActivity(i);
+                        finish();
                         break;
                 }
                 return true;
@@ -90,27 +96,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        if (SharedPrefManager.getInstance(this).isLoggedIn()) {
-            if(!SharedPrefManager.getInstance(this).isInitialized())
-            {
-                InitializeSQLCipher();
-                InitializeCategories();
-                SharedPrefManager.getInstance(this).Initialize();
-            } else {
-                initializeCats();
-                //initializePass();
-            }
-        } else {
-            Intent intent = new Intent(MainActivity.this, register.class);
-            startActivity(intent);
-            finish();
-        }
-        Bundle extras = getIntent().getExtras();
 
-        if(extras !=null)
-        {
-            passwords = extras.getString("password");
-        }
+
+
+
 
         view.addOnItemTouchListener(new RecyclerTouchListener(getApplicationContext(), view, new RecyclerTouchListener.ClickListener() {
             @Override
@@ -127,7 +116,24 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }));
+        Bundle extras = getIntent().getExtras();
+        if(extras !=null)
+        {
+            passwords = extras.getString("password");
+            initializeCats();
+        }else {
+            Intent intent = new Intent(MainActivity.this, register.class);
+            startActivity(intent);
+            finish();
+
+        }
+
+
+
+        if(category!=null)
         showCategories();
+
+
 
     }
 
@@ -238,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
+        if(category!=null)
         showCategories();
 
     }
@@ -245,7 +252,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        if(category!=null)
         showCategories();
+    }
+
+    public void out()
+    {
+        SharedPrefManager.getInstance(this).LogOut();
     }
 
 }
