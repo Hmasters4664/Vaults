@@ -22,7 +22,7 @@ import com.example.vault.objects.SharedPrefManager;
 import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
 
-public class register extends AppCompatActivity {
+public class register extends base {
     private EditText password;
     private TextView textViewPasswordStrengthIndiactor;
     private Button login;
@@ -138,5 +138,6 @@ public class register extends AppCompatActivity {
         }
 
     }
+
 
 }

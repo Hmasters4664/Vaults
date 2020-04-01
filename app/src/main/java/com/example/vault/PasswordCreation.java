@@ -17,7 +17,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 import java.io.File;
 import java.util.Random;
 
-public class PasswordCreation extends AppCompatActivity {
+public class PasswordCreation extends base {
 
     private SQLiteDatabase database;
     private String passwords;

@@ -33,7 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class ListViewr extends AppCompatActivity {
+public class ListViewr extends base {
 
     private SQLiteDatabase database;
     private String passwords;

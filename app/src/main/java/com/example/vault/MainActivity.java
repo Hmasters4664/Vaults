@@ -34,7 +34,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends base {
     private String passwords;
     private SQLiteDatabase database;
     private SQLiteDatabase category;
@@ -241,20 +241,6 @@ public class MainActivity extends AppCompatActivity {
         cancelUserDataButton = popupInputDialogView.findViewById(R.id.button_cancel_user_data);
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        if(category!=null)
-        showCategories();
-
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        if(category!=null)
-        showCategories();
-    }
 
     public void out()
     {
