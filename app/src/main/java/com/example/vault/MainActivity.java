@@ -23,6 +23,7 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.example.vault.Adapters.CategoryAdapter;
 import com.example.vault.Adapters.CustomSpinnerAdapter;
 import com.example.vault.objects.Categories;
+import com.example.vault.objects.GridSpacingItemDecoration;
 import com.example.vault.objects.SharedPrefManager;
 import com.example.vault.touchlisteners.RecyclerTouchListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -60,13 +61,17 @@ public class MainActivity extends base {
 
         cinfo= new ArrayList<>();
         cinfo.clear();
+        int spanCount = 3; // 3 columns
+        int spacing = 50; // 50px
+        boolean includeEdge = false;
 
         SQLiteDatabase.loadLibs(this);
         view = (RecyclerView) findViewById(R.id.rec);
         CatA = new CategoryAdapter(cinfo);
-        gridLayoutManager = new GridLayoutManager(getApplicationContext(),3);
-        gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        gridLayoutManager = new GridLayoutManager(getApplicationContext(),spanCount);
+        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         view.setLayoutManager(gridLayoutManager);
+        view.addItemDecoration(new GridSpacingItemDecoration(getApplicationContext(),R.dimen.default_gap));
         mNamesArray = getResources().getStringArray(R.array.names);
         picsArray = getResources().getStringArray(R.array.colours);
         view.setAdapter(CatA);

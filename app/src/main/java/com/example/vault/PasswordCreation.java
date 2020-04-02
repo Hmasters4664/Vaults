@@ -25,7 +25,7 @@ public class PasswordCreation extends base {
     private Long id;
     private CheckBox lower,upper,special,num;
     private EditText title,username,website,length,password;
-    private Button save,generate;
+    private Button save,generate,delete;
     private Boolean edits;
     private int len;
 
@@ -42,9 +42,13 @@ public class PasswordCreation extends base {
             id = extras.getLong("id");
             edits = extras.getBoolean("edit");
         }
+        delete = findViewById(R.id.delete);
+        delete.setVisibility(View.GONE);
         lower =findViewById(R.id.lowercase);
         upper = findViewById(R.id.uppercase);
         special = findViewById(R.id.special);
+        num = findViewById(R.id.numbers);
+        lower.setChecked(true);
         title = findViewById(R.id.tile);
         username = findViewById(R.id.username);
         website = findViewById(R.id.website);
@@ -55,9 +59,22 @@ public class PasswordCreation extends base {
         initializePass();
         if (edits)
         {
+            delete.setVisibility(View.VISIBLE);
 
             select();
         }
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                delete();
+                Intent intent = new Intent(getBaseContext(), ListViewr.class);
+                intent.putExtra("category",category);
+                intent.putExtra("password", passwords);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         generate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +109,7 @@ public class PasswordCreation extends base {
 
                }else
                {
-                   Toast.makeText(PasswordCreation.this, "Fill in title", Toast.LENGTH_LONG).show();
+                   Toast.makeText(PasswordCreation.this, "Fill in title or password", Toast.LENGTH_LONG).show();
                }
 
             }
@@ -104,7 +121,20 @@ public class PasswordCreation extends base {
     }
 
     public String GetPassword(int length){
-        char[] chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$&!".toCharArray();
+       String alpha = "abcdefghijklmnopqrstuvwxyz";
+        if(num.isChecked() ) {
+            alpha = alpha +"1234567890";
+        }
+        if(upper.isChecked() ) {
+            alpha = alpha +"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        }
+
+        if(special.isChecked() ) {
+            alpha = alpha +"@#$%&*()+";
+        }
+
+        char[] chars = alpha.toCharArray();
+
         StringBuilder stringBuilder = new StringBuilder();
 
         Random rand = new Random();
@@ -137,7 +167,7 @@ public class PasswordCreation extends base {
 
     private boolean check()
     {
-        if(title.getText().toString().isEmpty()) {
+        if(title.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
             return false;
         } else{
             return true;
@@ -170,6 +200,13 @@ public class PasswordCreation extends base {
             website.setText(cursor.getString(cursor.getColumnIndex("website")));
             password.setText(cursor.getString(cursor.getColumnIndex("password")));
         }
+    }
+
+    private void delete()
+    {
+        String query = "DELETE FROM passwords WHERE ROWID=?";
+        database.execSQL(query, new Long[] {id});
+
     }
 
 }

@@ -1,8 +1,9 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Vault</string>
 
     <string name="title_email">Email</string>
     <string name="title_finacial">Finance</string>
+    <string name="action_settings">Settings</string>
     <string name="title_social">Social Media</string>
     <string name="title_other">Other</string>
     <string name="title_settings">Settings</string>
@@ -16,15 +17,43 @@
     <string name="title">Title</string>
     <string name="username">Username</string>
     <string name="website">Website</string>
+    <string name="title_send_feedback">Send Feedback</string>
     <string name="password">Password</string>
     <string name="generate_password">Generate Password</string>
     <string name="lowercase">Lowercase</string>
     <string name="uppercase">Uppercase</string>
     <string name="numbers">Numbers</string>
+
+    <string name="lowercaseo">Lowercase only</string>
+    <string name="lower_uppercase">Lowercase and Uppercase</string>
+    <string name="numberso">Numbers Only</string>
+
     <string name="special_characters">Special Characters</string>
     <string name="password_length">Password Length</string>
+    <string name="defualt_password_length">Default Password Length</string>
+    <string name="defualt_length">16</string>
+    <string name="defualt_password_summary">Default length of generated passwords</string>
+    <string name="key_password_length">key_password_length</string>
+    <string name="title_version">Version</string>
     <string name="save">Save</string>
+    <string name="delete">Delete</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
 </resources>

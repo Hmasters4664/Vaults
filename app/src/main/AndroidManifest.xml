@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".PasswordCreation"></activity>
+        <activity android:name=".Settings"></activity>
+        <activity android:name=".PasswordCreation" />
         <activity android:name=".register" />
         <activity android:name=".ListViewr" />
         <activity android:name=".MainActivity">
