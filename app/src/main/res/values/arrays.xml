@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="colors">
-        <item>@color/white</item>
-        <item>@color/Orange1</item>
-        <item>@color/Orange2</item>
-        <item>@color/colorAccent</item>
-        <item>@color/purpleEnd</item>
-        <item>@color/greenStart</item>
-        <item>@color/greenEnd</item>
-        <item>@color/purple</item>
-        <item>@color/purpleStart</item>
-    </array>
 
     <string-array name="names">
         <item>white</item>
@@ -52,6 +41,13 @@
         <item>@string/lowercase</item>
         <item>Lowercase and Uppercase</item>
         <item>Lowercase and Uppercase and </item>
+    </string-array>
+
+    <string-array name="themes">
+        <item>AppTheme</item>
+        <item>Night</item>
+        <item>Orange</item>
+        <item>Pink</item>
     </string-array>
 
 </resources>

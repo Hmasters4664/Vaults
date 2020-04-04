@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="app1">#6200EE</color>
+    <color name="app1Dark">#3700B3</color>
+    <color name="app1Accent">#03DAC5</color>
     <color name="red">#FB0000</color>
     <color name="green">#07FB64</color>
     <color name="yellow">#F6EE0A</color>
@@ -21,4 +21,11 @@
     <color name="OrangeLight">#ffedcc</color>
     <color name="Orange1">#ffa500</color>
     <color name="Orange2">#f87b05</color>
+    <color name="night">#283F4D</color>
+    <color name="darkNight">#102733</color>
+    <color name="orange3">#F74E2E</color>
+
+    <color name="light_pink">#FDBCBC</color>
+    <color name="maroon">#970C0C</color>
+    <color name="darkpink">#D81B60</color>
 </resources>

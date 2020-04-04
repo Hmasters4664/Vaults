@@ -37,6 +37,10 @@
     <string name="title_version">Version</string>
     <string name="save">Save</string>
     <string name="delete">Delete</string>
+    <string name="def_theme">AppTheme</string>
+    <string name="theme_summary">Appearance</string>
+    <string name="theme_dialog_title">Theme</string>
+    <string name="settings">Settings</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

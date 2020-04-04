@@ -1,12 +1,14 @@
 package com.example.vault;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import com.example.vault.objects.SharedPrefManager;
 
@@ -16,6 +18,22 @@ public abstract class base extends AppCompatActivity {
 private long lastActivity;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+        SharedPreferences pref = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        String themeName = pref.getString("theme", "AppTheme");
+        if (themeName.equals("Night")) {
+            setTheme(R.style.Night);
+        } else if (themeName.equals("Orange")) {
+            Toast.makeText(this, "set theme", Toast.LENGTH_SHORT).show();
+            setTheme(R.style.Orange);
+        }else if (themeName.equals("Pink")) {
+            Toast.makeText(this, "set theme", Toast.LENGTH_SHORT).show();
+            setTheme(R.style.Pink);
+        }else if (themeName.equals("AppTheme")) {
+            Toast.makeText(this, "set theme", Toast.LENGTH_SHORT).show();
+            setTheme(R.style.AppTheme);
+        }
         super.onCreate(savedInstanceState);
         lastActivity = new Date().getTime();
     }

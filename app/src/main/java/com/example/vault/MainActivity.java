@@ -87,6 +87,8 @@ public class MainActivity extends base {
                         break;
                     case R.id.settings:
                         Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getBaseContext(), Settings.class);
+                        startActivity(intent);
                         break;
                     case R.id.exit_nav:
                         Toast.makeText(MainActivity.this, "Log Out", Toast.LENGTH_SHORT).show();

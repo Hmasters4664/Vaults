@@ -3,9 +3,59 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/app1</item>
+        <item name="colorPrimaryDark">@color/app1Dark</item>
+        <item name="backgroundColor">@color/white</item>
+        <item name="android:buttonStyle">@style/ButtonAppTheme</item>
+        <item name="colorAccent">@color/app1Accent</item>
+    </style>
+
+    <style name="Night" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/night</item>
+        <item name="colorPrimaryDark">@color/darkNight</item>
+        <item name="backgroundColor">@color/darkNight</item>
+        <item name="android:buttonStyle">@style/ButtonNight</item>
+        <item name="colorAccent">@color/orange3</item>
+    </style>
+
+    <style name="Orange" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/Orange2</item>
+        <item name="colorPrimaryDark">@color/roseStart</item>
+        <item name="backgroundColor">@color/OrangeLight</item>
+        <item name="android:buttonStyle">@style/ButtonOrange</item>
+        <item name="colorAccent">@color/OrangeLight</item>
+    </style>
+
+
+    <style name="Pink" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/light_pink</item>
+        <item name="colorPrimaryDark">@color/darkpink</item>
+        <item name="backgroundColor">@color/light_pink</item>
+        <item name="android:buttonStyle">@style/ButtonPink</item>
+        <item name="colorAccent">@color/maroon</item>
+    </style>
+
+    <style name="ButtonAppTheme" parent="@android:style/Widget.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/app1</item>
+    </style>
+
+    <style name="ButtonNight" parent="@android:style/Widget.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/night</item>
+    </style>
+
+    <style name="ButtonOrange" parent="@android:style/Widget.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/Orange2</item>
+    </style>
+
+    <style name="ButtonPink" parent="@android:style/Widget.Button">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:backgroundTint">@color/maroon</item>
     </style>
 
 </resources>

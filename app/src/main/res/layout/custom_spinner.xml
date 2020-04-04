@@ -9,7 +9,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:padding="5dp"
-        android:tint="@color/colorPrimary"
+        android:tint="@color/app1"
         android:src="@drawable/ic_launcher_foreground" /><!--Make sure image is present in Drawable folder-->
 
     <TextView

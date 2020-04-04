@@ -146,7 +146,6 @@ public class ListViewr extends base {
 
                     PList.add(ct);
                     PassA.notifyDataSetChanged();
-                    // MessA.notifyItemInserted(MessA.getItemCount()+1);
                     mrecyler.smoothScrollToPosition(PassA.getItemCount()-1);
 
                 } while (cursor.moveToNext());

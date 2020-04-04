@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         app:layout_constraintDimensionRatio="H,1:1"
-        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="8dp">
 
         <RelativeLayout
