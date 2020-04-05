@@ -22,9 +22,9 @@ import java.util.List;
 
 public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.ViewHolder> implements Filterable {
 
-    public List<Password> Passwordlist;
-    public List<Password> temp;
-    Context context;
+    private List<Password> Passwordlist;
+    private List<Password> temp;
+    private Context context;
 
     public PasswordAdapter( List<Password> bList)
     {
@@ -52,6 +52,7 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.title.setText(Passwordlist.get(position).getTitle());
+        holder.username.setText(Passwordlist.get(position).getUsername());
         ColorGenerator generator = ColorGenerator.MATERIAL;
         int color2 = generator.getColor(Passwordlist.get(position).getTitle());
         TextDrawable.IBuilder builder = TextDrawable.builder()
@@ -67,9 +68,9 @@ public class PasswordAdapter extends RecyclerView.Adapter<PasswordAdapter.ViewHo
     public class  ViewHolder extends RecyclerView.ViewHolder{
         View mView;
         public TextView title, username;
-        public ImageView image;
+        ImageView image;
 
-        public ViewHolder(View itemView){
+        ViewHolder(View itemView){
             super(itemView);
             mView=itemView;
             title = mView.findViewById(R.id.title);

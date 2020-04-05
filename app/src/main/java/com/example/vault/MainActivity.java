@@ -141,6 +141,10 @@ public class MainActivity extends base {
             finish();
 
         }
+        if(passwords!= null) {
+            initializePass();
+
+        }
 
 
 
@@ -151,24 +155,6 @@ public class MainActivity extends base {
 
 
     }
-
-    private void InitializeSQLCipher() {
-        File databaseFile = getDatabasePath("passwordfile.db");
-        databaseFile.mkdirs();
-        databaseFile.delete();
-        database = SQLiteDatabase.openOrCreateDatabase(databaseFile,passwords, null);
-        database.execSQL("create table passwords(title, username, website, password, notes, category)");
-    }
-    private void InitializeCategories()
-    {
-        File databaseFile = getDatabasePath("categories.db");
-        databaseFile.mkdirs();
-        databaseFile.delete();
-        category = SQLiteDatabase.openOrCreateDatabase(databaseFile,"#!@#$%^&()0987654321", null);
-        category.execSQL("create table categories(Name, Colour)");
-
-    }
-
     private void initializeCats()
     {
         File databaseFile = getDatabasePath("categories.db");

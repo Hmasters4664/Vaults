@@ -121,7 +121,10 @@ public class PasswordCreation extends base {
     }
 
     public String GetPassword(int length){
-       String alpha = "abcdefghijklmnopqrstuvwxyz";
+       String alpha = "";
+       if(lower.isChecked()){
+           alpha = alpha +"abcdefghijklmnopqrstuvwxyz";
+       }
         if(num.isChecked() ) {
             alpha = alpha +"1234567890";
         }
@@ -167,11 +170,7 @@ public class PasswordCreation extends base {
 
     private boolean check()
     {
-        if(title.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
-            return false;
-        } else{
-            return true;
-        }
+        return !title.getText().toString().isEmpty() && !password.getText().toString().isEmpty();
     }
 
     private void edit()
@@ -187,7 +186,7 @@ public class PasswordCreation extends base {
         data.put("website",w);
         data.put("password",p);
         data.put("notes",n);
-        database.update("passwords",data,"ROWID="+Long.toString(id),null);
+        database.update("passwords",data,"ROWID="+ id,null);
 
 
     }
