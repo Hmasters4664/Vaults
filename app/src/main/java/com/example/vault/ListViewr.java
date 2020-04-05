@@ -87,7 +87,8 @@ public class ListViewr extends base {
 
                         break;
                     case R.id.settings:
-                        Toast.makeText(ListViewr.this, "Settings", Toast.LENGTH_SHORT).show();
+                        Intent g = new Intent(getBaseContext(), Settings.class);
+                        startActivity(g);
                         break;
                     case R.id.exit_nav:
                         Toast.makeText(ListViewr.this, "Log Out", Toast.LENGTH_SHORT).show();

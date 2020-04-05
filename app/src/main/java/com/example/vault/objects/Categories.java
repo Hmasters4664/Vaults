@@ -2,6 +2,7 @@ package com.example.vault.objects;
 
 public class Categories {
     private String Name;
+    private long rowid;
     private int Colour;
 
     public Categories()
@@ -10,10 +11,11 @@ public class Categories {
         this.Colour=0;
     }
 
-    public Categories(String Name, int Colour)
+    public Categories(String Name, int Colour, long rowid)
     {
         this.Name=Name;
         this.Colour=Colour;
+        this.rowid=rowid;
     }
 
     public int getColour() {
@@ -30,5 +32,13 @@ public class Categories {
 
     public void setName(String name) {
         Name = name;
+    }
+
+    public void setRowid(long rowid) {
+        this.rowid = rowid;
+    }
+
+    public long getRowid() {
+        return rowid;
     }
 }

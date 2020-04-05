@@ -2,22 +2,20 @@ package com.example.vault;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.example.vault.Adapters.CategoryAdapter;
@@ -52,7 +50,7 @@ public class MainActivity extends base {
     private EditText catagoryName;
     private Spinner spinner;
     private Button saveUserDataButton, cancelUserDataButton;
-
+    private Boolean delete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +62,8 @@ public class MainActivity extends base {
         int spanCount = 3; // 3 columns
         int spacing = 50; // 50px
         boolean includeEdge = false;
+
+        delete = false;
 
         SQLiteDatabase.loadLibs(this);
         view = (RecyclerView) findViewById(R.id.rec);
@@ -82,16 +82,13 @@ public class MainActivity extends base {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.new_cat:
-                        Toast.makeText(MainActivity.this, "New category", Toast.LENGTH_SHORT).show();
                         dialogbuilder();
                         break;
                     case R.id.settings:
-                        Toast.makeText(MainActivity.this, "Settings", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getBaseContext(), Settings.class);
                         startActivity(intent);
                         break;
                     case R.id.exit_nav:
-                        Toast.makeText(MainActivity.this, "Log Out", Toast.LENGTH_SHORT).show();
                         out();
                         Intent i = new Intent(getBaseContext(), register.class);
                         startActivity(i);
@@ -120,6 +117,16 @@ public class MainActivity extends base {
 
             @Override
             public void onLongClick(View view, int position) {
+                /*long id= cinfo.get(position).getRowid();
+                String query = "DELETE FROM categories WHERE ROWID=?";
+                category.execSQL(query, new Long[] {id});
+                showCategories();*/
+
+                alert(position);
+
+
+
+
 
             }
         }));
@@ -139,6 +146,7 @@ public class MainActivity extends base {
 
         if(category!=null)
         showCategories();
+
 
 
 
@@ -176,7 +184,7 @@ public class MainActivity extends base {
 
     private void showCategories()
     {
-        String query = "SELECT * FROM categories";
+        String query = "SELECT Name, Colour, ROWID  FROM categories";
         Cursor cursor = category.rawQuery(query, null);
         cinfo.clear();
 
@@ -184,6 +192,7 @@ public class MainActivity extends base {
             if (cursor.moveToFirst()) {
                 do {
                     Categories ct = new Categories();
+                    ct.setRowid(cursor.getLong(cursor.getColumnIndex("rowid")));
                     ct.setName(cursor.getString(cursor.getColumnIndex("Name")));
                     ct.setColour(cursor.getInt(cursor.getColumnIndex("Colour")));
 
@@ -252,6 +261,32 @@ public class MainActivity extends base {
     public void out()
     {
         SharedPrefManager.getInstance(this).LogOut();
+    }
+    private void alert(final int p)
+    {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        long id= cinfo.get(p).getRowid();
+                        String query = "DELETE FROM categories WHERE ROWID=?";
+                        category.execSQL(query, new Long[] {id});
+                        showCategories();
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        delete = false;
+                        dialog.cancel();
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setMessage("Are you sure you wish to delete that category?").setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener).show();
+
     }
 
 }
