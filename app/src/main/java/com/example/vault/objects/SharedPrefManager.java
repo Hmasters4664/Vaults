@@ -53,6 +53,14 @@ public class SharedPrefManager {
         editor.apply();
     }
 
+    public void deInitialize()
+    {
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(IS_INITIALIZED,false);
+        editor.apply();
+    }
+
     public void LogOut() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

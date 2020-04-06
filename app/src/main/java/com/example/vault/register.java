@@ -30,6 +30,7 @@ public class register extends base {
     private SQLiteDatabase database;
     private SQLiteDatabase category;
     private String sh, sh2;
+    private int counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class register extends base {
         password = findViewById(R.id.input_password);
         textViewPasswordStrengthIndiactor = findViewById(R.id.strength);
         login = findViewById(R.id.button);
+        counter = 0;
         Bundle extras = getIntent().getExtras();
         if(!SharedPrefManager.getInstance(getApplicationContext()).isInitialized())
         {
@@ -140,7 +142,16 @@ public class register extends base {
             startActivity(intent);
             finish();
         } else {
-            Toast.makeText(register.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+            if(counter<3) {
+                Toast.makeText(register.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+                counter++;
+            }else{
+                Toast.makeText(register.this, "Deleting database and closing", Toast.LENGTH_LONG).show();
+                InitializeSQLCipher();
+                InitializeCategories();
+                SharedPrefManager.getInstance(getApplicationContext()).deInitialize();
+                finish();
+            }
         }
 
     }
