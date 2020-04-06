@@ -42,6 +42,8 @@
     <string name="theme_dialog_title">Theme</string>
     <string name="settings">Settings</string>
     <string name="open">Open</string>
+    <string name="Enter_password_register">Enter the registration Password</string>
+    <string name="Enter_password">Enter the Password given during registration</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

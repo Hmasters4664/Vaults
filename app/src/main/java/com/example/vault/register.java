@@ -40,6 +40,12 @@ public class register extends base {
         textViewPasswordStrengthIndiactor = findViewById(R.id.strength);
         login = findViewById(R.id.button);
         Bundle extras = getIntent().getExtras();
+        if(!SharedPrefManager.getInstance(getApplicationContext()).isInitialized())
+        {
+            textViewPasswordStrengthIndiactor.setText(R.string.Enter_password_register);
+        } else {
+            textViewPasswordStrengthIndiactor.setText(R.string.Enter_password);
+        }
 
         password.addTextChangedListener(new TextWatcher() {
 
