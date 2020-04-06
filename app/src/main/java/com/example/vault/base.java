@@ -25,13 +25,10 @@ private long lastActivity;
         if (themeName.equals("Night")) {
             setTheme(R.style.Night);
         } else if (themeName.equals("Orange")) {
-            Toast.makeText(this, "set theme", Toast.LENGTH_SHORT).show();
             setTheme(R.style.Orange);
         }else if (themeName.equals("Pink")) {
-            Toast.makeText(this, "set theme", Toast.LENGTH_SHORT).show();
             setTheme(R.style.Pink);
         }else if (themeName.equals("AppTheme")) {
-            Toast.makeText(this, "set theme", Toast.LENGTH_SHORT).show();
             setTheme(R.style.AppTheme);
         }
         super.onCreate(savedInstanceState);
@@ -53,5 +50,10 @@ private long lastActivity;
             startActivity(i);
         }
         super.onResume();
+    }
+
+    public void out()
+    {
+        SharedPrefManager.getInstance(this).LogOut();
     }
 }

@@ -244,10 +244,7 @@ public class MainActivity extends base {
     }
 
 
-    public void out()
-    {
-        SharedPrefManager.getInstance(this).LogOut();
-    }
+
     private void alert(final int p)
     {
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {

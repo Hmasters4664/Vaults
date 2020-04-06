@@ -60,7 +60,6 @@ public class PasswordCreation extends base {
         if (edits)
         {
             delete.setVisibility(View.VISIBLE);
-
             select();
         }
 
