@@ -44,41 +44,14 @@ public class register extends base {
         Bundle extras = getIntent().getExtras();
         if(!SharedPrefManager.getInstance(getApplicationContext()).isInitialized())
         {
-            textViewPasswordStrengthIndiactor.setText(R.string.Enter_password_register);
+            Intent intent = new Intent(register.this, register1.class);
+            startActivity(intent);
+            finish();
         } else {
             textViewPasswordStrengthIndiactor.setText(R.string.Enter_password);
         }
 
-        password.addTextChangedListener(new TextWatcher() {
 
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {
-                // When No Password Entered
-                //textViewPasswordStrengthIndiactor.setText("");
-            }
-
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {
-
-            }
-
-            public void afterTextChanged(Editable s)
-            {
-                if(s.length()>=16) {
-                    textViewPasswordStrengthIndiactor.setText("STRONG");
-                    textViewPasswordStrengthIndiactor.setTextColor(getResources().getColor(R.color.green));
-                }
-                else if(s.length()>10 && s.length()<16 ) {
-                    textViewPasswordStrengthIndiactor.setText("MEDIUM");
-                    textViewPasswordStrengthIndiactor.setTextColor(getResources().getColor(R.color.yellow));
-                }
-                else if(s.length()<=10) {
-                    textViewPasswordStrengthIndiactor.setText("WEAK");
-                    textViewPasswordStrengthIndiactor.setTextColor(getResources().getColor(R.color.red));
-                }
-
-            }
-        });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
